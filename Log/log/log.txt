@@ -1,0 +1,8 @@
+[2025-06-09 11:17:46] [DEBUG] [285069] [Main.cc] [9] - hello file
+[2025-06-09 11:17:46] [DEBUG] [285069] [Main.cc] [10] - hello file
+[2025-06-09 11:17:46] [DEBUG] [285069] [Main.cc] [11] - hello file
+[2025-06-09 11:17:46] [DEBUG] [285069] [Main.cc] [12] - hello file
+[2025-06-09 11:20:29] [DEBUG] [285322] [Main.cc] [9] - hello file
+[2025-06-09 11:20:29] [DEBUG] [285322] [Main.cc] [10] - hello file
+[2025-06-09 11:20:29] [DEBUG] [285322] [Main.cc] [11] - hello file
+[2025-06-09 11:20:29] [DEBUG] [285322] [Main.cc] [12] - hello file

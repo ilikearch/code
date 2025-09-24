@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到 - 404错误</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .error-code {
+            font-size: 12rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .error-code .digit {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .error-code .digit:nth-child(1) { animation-delay: 0s; }
+        .error-code .digit:nth-child(2) { animation-delay: 0.2s; }
+        .error-code .digit:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: #FFD166;
+            color: #333;
+            border: 2px solid #FFD166;
+        }
+        
+        .btn-primary:hover {
+            background: #FFC145;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-btn {
+            padding: 0.8rem 1.5rem;
+            background: #FFD166;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #FFC145;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: cloudMove linear infinite;
+        }
+        
+        @keyframes cloudMove {
+            from { transform: translateX(-100px); }
+            to { transform: translateX(calc(100vw + 100px)); }
+        }
+        
+        .cloud:nth-child(1) {
+            width: 100px;
+            height: 40px;
+            top: 15%;
+            animation-duration: 40s;
+        }
+        
+        .cloud:nth-child(2) {
+            width: 150px;
+            height: 60px;
+            top: 25%;
+            animation-duration: 60s;
+            animation-delay: -20s;
+        }
+        
+        .cloud:nth-child(3) {
+            width: 80px;
+            height: 30px;
+            top: 70%;
+            animation-duration: 50s;
+            animation-delay: -10s;
+        }
+        
+        .astronaut {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            font-size: 5rem;
+            animation: astronautFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes astronautFloat {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 8rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .astronaut {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景云朵 -->
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    
+    <!-- 宇航员图标 -->
+    <div class="astronaut">👨‍🚀</div>
+    
+    <div class="container">
+        <div class="error-code">
+            <span class="digit">4</span>
+            <span class="digit">0</span>
+            <span class="digit">4</span>
+        </div>
+        
+        <h1>哎呀！页面不见了</h1>
+        
+        <p>您要查找的页面可能已被移动、重命名或暂时不可用。请检查URL是否正确，或使用下面的搜索功能查找您需要的内容。</p>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索网站内容...">
+            <button class="search-btn">搜索</button>
+        </div>
+        
+        <div class="actions">
+            <a href="/" class="btn btn-primary">
+                <a href="/">返回首页</a>
+            </a>
+            <a href="#" class="btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> 返回上页
+            </a>
+            <a href="/contact" class="btn">
+                <i class="fas fa-envelope"></i> 联系我们
+            </a>
+        </div>
+        
+        <p>或者 <a href="/sitemap" style="color: #FFD166; text-decoration: underline;">查看网站地图</a> 寻找您需要的内容</p>
+    </div>
+
+    <script>
+        // 搜索功能
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.querySelector('.search-input').value;
+            if(query.trim() !== '') {
+                alert(`搜索: ${query}\n（在实际应用中，这里会跳转到搜索结果页面）`);
+                // 实际应用中应该是: window.location.href = `/search?q=${encodeURIComponent(query)}`;
+            }
+        });
+        
+        // 回车键搜索
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+        
+        // 添加更多云朵
+        function createClouds() {
+            const body = document.querySelector('body');
+            for(let i = 0; i < 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.classList.add('cloud');
+                
+                // 随机大小和位置
+                const size = Math.random() * 100 + 50;
+                cloud.style.width = `${size}px`;
+                cloud.style.height = `${size/2.5}px`;
+                cloud.style.top = `${Math.random() * 100}%`;
+                cloud.style.left = `${Math.random() * 100}%`;
+                
+                // 随机动画时长和延迟
+                cloud.style.animationDuration = `${Math.random() * 50 + 30}s`;
+                cloud.style.animationDelay = `-${Math.random() * 60}s`;
+                
+                body.appendChild(cloud);
+            }
+        }
+        
+        // 页面加载完成后创建云朵
+        window.addEventListener('load', createClouds);
+    </script>
+</body>
+</html>

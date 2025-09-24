@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录成功 - 王者荣耀</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 背景图片 */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://img.zcool.cn/community/01b3b45f8d2f3511013f3110e1d3d8.jpg@1280w_1l_2o_100sh.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+            filter: brightness(0.4);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(12, 12, 12, 0.8) 0%, rgba(26, 26, 46, 0.7) 50%, rgba(22, 33, 62, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 2px solid #c8a03c;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: #c8a03c;
+            font-size: 2rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c8a03c, #ffd700);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(200, 160, 60, 0.5);
+        }
+        
+        /* 成功页面内容 */
+        .success-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 8rem;
+            color: #c8a03c;
+            margin-bottom: 2rem;
+            animation: bounce 1s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .success-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #c8a03c, #ffd700);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .success-message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+        }
+        
+        .username {
+            color: #c8a03c;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, #c8a03c, #b8941f);
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 160, 60, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(200, 160, 60, 0.2);
+            color: #c8a03c;
+            border: 2px solid #c8a03c;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(200, 160, 60, 0.3);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .success-icon {
+                font-size: 6rem;
+            }
+            
+            .success-title {
+                font-size: 2.5rem;
+            }
+            
+            .success-message {
+                font-size: 1.2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .success-icon {
+                font-size: 4rem;
+            }
+            
+            .success-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景图片 -->
+    <div class="background"></div>
+    <div class="overlay"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-crown logo-icon"></i>
+            <span class="logo-text">王者荣耀</span>
+        </div>
+    </nav>
+    
+    <!-- 成功页面内容 -->
+    <div class="success-container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1 class="success-title">登录成功！</h1>
+        
+        <p class="success-message">
+            欢迎回来，<span class="username" id="username">召唤师</span>！<br>
+            准备开始你的王者征程了吗？
+        </p>
+        
+        <div class="action-buttons">
+            <a href="game.html" class="btn">
+                <i class="fas fa-play"></i>
+                开始游戏
+            </a>
+            <a href="profile.html" class="btn btn-secondary">
+                <i class="fas fa-user"></i>
+                查看个人资料
+            </a>
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-home"></i>
+                返回首页
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 从URL参数获取用户名
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        
+        if (username) {
+            document.getElementById('username').textContent = decodeURIComponent(username);
+        }
+        
+        // 添加一些庆祝效果
+        setTimeout(() => {
+            const container = document.querySelector('.success-container');
+            const confetti = document.createElement('div');
+            confetti.innerHTML = '🎉';
+            confetti.style.position = 'absolute';
+            confetti.style.fontSize = '2rem';
+            confetti.style.top = '20%';
+            confetti.style.left = '10%';
+            confetti.style.animation = 'confettiFall 3s ease-in-out';
+            container.appendChild(confetti);
+            
+            // 添加CSS动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes confettiFall {
+                    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+                    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }, 500);
+    </script>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀 - 官方网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 动态背景 */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            z-index: -2;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(200, 160, 60, 0.5);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 2px solid #c8a03c;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: #c8a03c;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c8a03c, #ffd700);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(200, 160, 60, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #c8a03c;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c8a03c;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 主要内容区域 */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            align-items: center;
+            padding: 2rem 5%;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #c8a03c, #ffd700);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(200, 160, 60, 0.7);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #bbb;
+        }
+
+        .features {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature i {
+            color: #c8a03c;
+            font-size: 1.2rem;
+        }
+
+        /* 登录注册区域 */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .auth-box {
+            background: rgba(20, 20, 30, 0.8);
+            border: 2px solid #c8a03c;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(200, 160, 60, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            color: #c8a03c;
+            border-bottom: 3px solid #c8a03c;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #c8a03c;
+            box-shadow: 0 0 5px rgba(200, 160, 60, 0.5);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(to right, #c8a03c, #b8941f);
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #d4af37, #c8a03c);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(200, 160, 60, 0.4);
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a {
+            color: #c8a03c;
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 下载按钮 */
+        .download-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid #333;
+        }
+
+        .download-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #c8a03c;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, #c8a03c, #b8941f);
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 160, 60, 0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin-bottom: 2rem;
+            }
+
+            .features {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-box {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 动态背景 -->
+    <div class="background"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-crown logo-icon"></i>
+            <span class="logo-text">王者荣耀</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">英雄</a>
+            <a href="#">新闻</a>
+            <a href="#">赛事</a>
+            <a href="#">社区</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">王者荣耀</h1>
+            <h2 class="hero-subtitle">5V5英雄公平对战手游</h2>
+            <p class="hero-description">
+                王者荣耀是腾讯第一5V5团队公平对战手游，国民MOBA手游大作！5V5王者峡谷、公平对战、还原MOBA经典体验；契约之战、五军对决、边境突围等，带来花式作战乐趣！
+            </p>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>团队竞技</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-trophy"></i>
+                    <span>公平对战</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-gamepad"></i>
+                    <span>多种模式</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">登录</div>
+                    <div class="auth-tab" data-tab="register">注册</div>
+                </div>
+
+                <form class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-account">账号</label>
+                        <input type="text" id="login-account" class="form-control" placeholder="请输入账号">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">密码</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="请输入密码">
+                    </div>
+                    <button type="button" class="btn" id="login-btn">登录游戏</button>
+                    <div class="auth-links">
+                        <a href="#">忘记密码?</a>
+                        <a href="#" id="switch-to-register">立即注册</a>
+                    </div>
+                </form>
+
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label for="register-account">账号</label>
+                        <input type="text" id="register-account" class="form-control" placeholder="6-12位字母或数字">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">密码</label>
+                        <input type="password" id="register-password" class="form-control" placeholder="6-16位字符">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">确认密码</label>
+                        <input type="password" id="register-confirm" class="form-control" placeholder="请再次输入密码">
+                    </div>
+                    <button type="button" class="btn" id="register-btn">注册账号</button>
+                    <div class="auth-links">
+                        <a href="#" id="switch-to-login">已有账号?立即登录</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 下载区域 -->
+    <div class="download-section">
+        <h2 class="download-title">立即下载游戏</h2>
+        <div class="download-buttons">
+            <a href="#" class="download-btn">
+                <i class="fab fa-android"></i>
+                <span>Android下载</span>
+            </a>
+            <a href="#" class="download-btn">
+                <i class="fab fa-apple"></i>
+                <span>iOS下载</span>
+            </a>
+            <a href="#" class="download-btn">
+                <i class="fas fa-desktop"></i>
+                <span>电脑版下载</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 粒子背景效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // 随机大小和位置
+                const size = Math.random() * 5 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+
+                // 随机动画延迟和持续时间
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // 登录注册切换
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                // 移除所有active类
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+
+                // 添加active类到当前选项卡
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-form`).classList.add('active');
+            });
+        });
+
+        // 切换链接
+        document.getElementById('switch-to-register').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('.auth-tab[data-tab="register"]').click();
+        });
+
+        document.getElementById('switch-to-login').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('.auth-tab[data-tab="login"]').click();
+        });
+
+        // 登录按钮事件
+        document.getElementById('login-btn').addEventListener('click', function () {
+            const account = document.getElementById('login-account').value;
+            const password = document.getElementById('login-password').value;
+
+            if (!account || !password) {
+                alert('请输入账号和密码！');
+                return;
+            }
+
+            // 模拟登录过程
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 登录中...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'success.html?username=' + encodeURIComponent(account);
+            }, 1500);
+        });
+        // 注册按钮事件
+        document.getElementById('register-btn').addEventListener('click', function () {
+            const account = document.getElementById('register-account').value;
+            const password = document.getElementById('register-password').value;
+            const confirm = document.getElementById('register-confirm').value;
+
+            if (!account || !password || !confirm) {
+                alert('请填写所有字段！');
+                return;
+            }
+
+            if (password !== confirm) {
+                alert('两次输入的密码不一致！');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('密码长度不能少于6位！');
+                return;
+            }
+
+            // 模拟注册过程
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 注册中...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                // 跳转到当前目录下的注册成功页面
+                window.location.href = 'success.html?username=' + encodeURIComponent(account);
+            }, 1500);
+        });
+
+        // 初始化粒子效果
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+
+</html>
